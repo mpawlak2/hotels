@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 
 HOTEL_STARS = [
 		('1', 'One star hotel.'),
@@ -11,7 +11,7 @@ HOTEL_STARS = [
 
 class HotelModel(models.Model):
 	name 			= models.CharField(max_length=50, verbose_name='Hotel name')
-	slug 			= models.SlugField(max_length=40)
+	slug 			= models.SlugField(max_length=40, unique=True)
 	price 			= models.DecimalField(max_digits=8, decimal_places=2)
 	description 	= models.TextField(null=True, blank=True)
 	stars 			= models.CharField(max_length=1, verbose_name='Hotel stars', choices=HOTEL_STARS, default='1')
