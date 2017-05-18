@@ -11,12 +11,14 @@ HOTEL_STARS = [
 
 class HotelModel(models.Model):
 	name 			= models.CharField(max_length=50, verbose_name='Hotel name')
-	slug 			= models.SlugField(max_length=40, unique=True)
+	slug 			= models.SlugField(max_length=40, unique=True, null=True, blank=True)
 	price 			= models.DecimalField(max_digits=8, decimal_places=2)
 	description 	= models.TextField(null=True, blank=True)
 	stars 			= models.CharField(max_length=1, verbose_name='Hotel stars', choices=HOTEL_STARS, default='1')
 	insert_date		= models.DateTimeField(auto_now_add=True)
 
+	def save(self, *args, **kwargs):
+		super(HotelModel, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = 'Hotel'
