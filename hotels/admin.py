@@ -13,6 +13,7 @@ class HotelModelAdmin(admin.ModelAdmin):
 			'updated',
 			'insert_date',
 			'timestamp',
+			'age',
 	]
 
 	readonly_fields = [
@@ -20,7 +21,11 @@ class HotelModelAdmin(admin.ModelAdmin):
 		'insert_date',
 		'updated',
 		'timestamp',
+		'age',
 	]
+
+	def age(self, obj, *args, **kwargs):
+		return str(obj.age)
 
 	class Meta:
 		model = HotelModel

@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.db.models.signals import post_save, pre_save
+from django.utils.timesince import timesince
+
 HOTEL_STARS = [
 		('1', 'One star hotel.'),
 		('2', 'Two stars hotel.'),
@@ -25,6 +27,10 @@ class HotelModel(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	@property
+	def age(self):
+		return timesince(self.timestamp)
 
 
 def hotel_model_pre_save(sender, instance, *args, **kwargs):
