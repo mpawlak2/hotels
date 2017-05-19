@@ -12,9 +12,16 @@ HOTEL_STARS = [
 		('5', 'Five stars hotel.'),
 	]
 
+class HotelModeQuerySet(models.query.QuerySet):
+	def active(self):
+		return self.filter(active=True)
+
 class HotelModelManager(models.Manager):
+	def get_queryset(self):
+		return HotelModeQuerySet(self.model, using=self._db)
+
 	def all(self, *args, **kwargs):
-		qs = super(HotelModelManager, self).all(*args, **kwargs).filter(active=True)
+		qs = super(HotelModelManager, self).all(*args, **kwargs).active()
 
 		return qs
 
