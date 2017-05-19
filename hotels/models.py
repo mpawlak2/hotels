@@ -12,6 +12,12 @@ HOTEL_STARS = [
 		('5', 'Five stars hotel.'),
 	]
 
+class HotelModelManager(models.Manager):
+	def all(self, *args, **kwargs):
+		qs = super(HotelModelManager, self).all(*args, **kwargs).filter(active=True)
+
+		return qs
+
 class HotelModel(models.Model):
 	name 			= models.CharField(max_length=50, verbose_name='Hotel name')
 	slug 			= models.SlugField(max_length=40, unique=True, null=True, blank=True, error_messages={'unique': 'This slug is not unique.'}, help_text='Must be unique.', editable=False)
@@ -21,6 +27,8 @@ class HotelModel(models.Model):
 	insert_date		= models.DateTimeField(auto_now_add=True)
 	updated 		= models.DateTimeField(auto_now=True)
 	timestamp		= models.DateTimeField(auto_now_add=True)
+	active 			= models.BooleanField(default=True)
+
 	class Meta:
 		verbose_name = 'Hotel'
 		verbose_name_plural = 'Hotels'
