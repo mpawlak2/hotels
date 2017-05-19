@@ -14,6 +14,7 @@ class HotelModelAdmin(admin.ModelAdmin):
 			'insert_date',
 			'timestamp',
 			'age',
+			'active',
 	]
 
 	readonly_fields = [
@@ -21,7 +22,7 @@ class HotelModelAdmin(admin.ModelAdmin):
 		'insert_date',
 		'updated',
 		'timestamp',
-		'age',
+		'age', 
 	]
 
 	def age(self, obj, *args, **kwargs):
