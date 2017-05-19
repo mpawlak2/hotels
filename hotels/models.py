@@ -17,7 +17,8 @@ class HotelModel(models.Model):
 	description 	= models.TextField(null=True, blank=True)
 	stars 			= models.CharField(max_length=1, verbose_name='Hotel stars', choices=HOTEL_STARS, default='1')
 	insert_date		= models.DateTimeField(auto_now_add=True)
-
+	updated 		= models.DateTimeField(auto_now=True)
+	timestamp		= models.DateTimeField(auto_now_add=True)
 	class Meta:
 		verbose_name = 'Hotel'
 		verbose_name_plural = 'Hotels'
