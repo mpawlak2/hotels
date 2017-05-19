@@ -29,7 +29,7 @@ class HotelModel(models.Model):
 	timestamp		= models.DateTimeField(auto_now_add=True)
 	active 			= models.BooleanField(default=True)
 
-	objects 		= HotelModelManager()
+	objects = HotelModelManager()
 
 	class Meta:
 		verbose_name = 'Hotel'
