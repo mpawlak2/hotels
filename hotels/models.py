@@ -21,8 +21,7 @@ class HotelModelManager(models.Manager):
 		return HotelModeQuerySet(self.model, using=self._db)
 
 	def all(self, *args, **kwargs):
-		qs = super(HotelModelManager, self).all(*args, **kwargs).active()
-
+		qs = self.get_queryset().active()
 		return qs
 
 class HotelModel(models.Model):
