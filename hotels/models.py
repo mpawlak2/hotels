@@ -26,7 +26,7 @@ class HotelModelManager(models.Manager):
 		return qs
 
 	def get_timeframe(self, from_date, to_date):
-		qs = self.get_queryset
+		qs = self.get_queryset()
 		qs_date_from = qs.filter(timestamp__gte=from_date)
 		qs_date_to = qs_date_from.filter(timestamp__lte=to_date)
 
