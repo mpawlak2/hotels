@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.db.models.signals import post_save, pre_save
 from django.utils.timesince import timesince
+from datetime import datetime
 
 HOTEL_STARS = [
 		('1', 'One star hotel.'),
@@ -23,6 +24,15 @@ class HotelModelManager(models.Manager):
 	def all(self, *args, **kwargs):
 		qs = self.get_queryset().active()
 		return qs
+
+	def get_timeframe(self, from_date, to_date):
+		qs = self.get_queryset
+		qs_date_from = qs.filter(timestamp__gte=from_date)
+		qs_date_to = qs_date_from.filter(timestamp__lte=to_date)
+
+		# final_qs = (qs_date_from | qs_date_to).distinct() 
+		return qs_date_to
+		# Assume datetime objects.
 
 class HotelModel(models.Model):
 	name 			= models.CharField(max_length=50, verbose_name='Hotel name')
